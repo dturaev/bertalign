@@ -1,6 +1,10 @@
 import re
-from googletrans import Translator
+# from googletrans import Translator
+from lingua import Language, LanguageDetectorBuilder
 from sentence_splitter import SentenceSplitter
+
+languages = [Language.ENGLISH, Language.FRENCH, Language.GERMAN, Language.SPANISH, Language.RUSSIAN, Language.UKRAINIAN, language.JAPANESE]
+detector = LanguageDetectorBuilder.from_languages(*languages).build()
 
 def clean_text(text):
     clean_text = []
@@ -14,12 +18,14 @@ def clean_text(text):
     return "\n".join(clean_text)
     
 def detect_lang(text):
-    translator = Translator(service_urls=[
-      'translate.google.com.hk',
-    ])
+    # translator = Translator(service_urls=[
+    #   'translate.google.com.hk',
+    # ])
     max_len = 200
     chunk = text[0 : min(max_len, len(text))]
-    lang = translator.detect(chunk).lang
+    lang = detector.detect_language_of(chunk)
+    # lang = translator.detect(chunk).lang
+    lang = lang.iso_code_639_1.name.lower()
     if lang.startswith('zh'):
         lang = 'zh'
     return lang
