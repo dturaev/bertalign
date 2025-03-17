@@ -3,7 +3,7 @@ import re
 from lingua import Language, LanguageDetectorBuilder
 from sentence_splitter import SentenceSplitter
 
-languages = [Language.ENGLISH, Language.FRENCH, Language.GERMAN, Language.SPANISH, Language.RUSSIAN, Language.UKRAINIAN, language.JAPANESE]
+languages = [Language.ENGLISH, Language.FRENCH, Language.GERMAN, Language.SPANISH, Language.RUSSIAN, Language.UKRAINIAN, Language.JAPANESE]
 detector = LanguageDetectorBuilder.from_languages(*languages).build()
 
 def clean_text(text):
